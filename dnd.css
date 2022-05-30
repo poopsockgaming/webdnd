@@ -1,0 +1,123 @@
+body {
+    background: url("brickwall.jpeg") no-repeat;
+    background-size: 1680px 1000px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-family: Copperplate, fantasy;
+    font-size: xxx-large;
+    align-items: center;
+    margin: auto;
+    width: 600px;
+    background-color: darkturquoise;
+
+}
+
+h2 {
+    color: white;
+}
+
+button {
+    font-size: 20px;
+background-color: lightblue;
+    border: white;
+}
+
+.hp {
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.ac {
+    margin-left: 100px;
+}
+
+.location {
+    margin-left: 100px;
+}
+
+.inventory {
+    margin-left: 100px;
+}
+
+textarea {
+    position: absolute;
+    top: 80px;
+    left: 400px;
+    width: 850px;
+    height: 500px;
+
+}
+
+.north {
+    position: absolute;
+    top: 80px;
+    left: 1400px;
+    width: 50px;
+    height: 50px;
+}
+
+.east {
+    position: absolute;
+    top: 160px;
+    left: 1500px;
+    width: 50px;
+    height: 50px;
+}
+
+.south {
+    position: absolute;
+    top: 240px;
+    left: 1400px;
+    width: 50px;
+    height: 50px;
+}
+
+.west {
+    position: absolute;
+    top: 160px;
+    left: 1300px;
+    width: 50px;
+    height: 50px;
+}
+
+.compass{
+    position:absolute;
+    top: 120px;
+    left: 1375px;
+    width: 100px;
+    height: 100px;
+}
+
+.attack {
+    position: absolute;
+    top: 350px;
+    left: 1300px;
+    width: 50px;
+    height: 50px;
+}
+
+.quaff {
+    position: absolute;
+    top: 400px;
+    left: 1300px;
+    width: 50px;
+    height: 50px;
+}
+
+.highlight {
+
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+    text-align: center;
+    margin-top: 100px;
+    border: 1px solid purple;
+}
