@@ -3,6 +3,7 @@
 <head>
     <title>Web D&D</title>
     <link rel="stylesheet" href="dnd.css">
+    <script src="dnd.js"> </script>
 </head>
 <body>
 
@@ -17,18 +18,18 @@
 <h2><span class="ac">AC:</span></h2>
 <h2><span class="location">Location:</span></h2>
 <h2><span class="inventory">Inventory:</span></h2>
-<textarea rows="30" cols="100">HP: 10
+<textarea rows="30" cols="100" id="text_area">HP: 10
 You take a potion
 </textarea>
 
 <img src="compass.png" class="compass">
 
-<div class="north"><button>North</button></div>
-<span class="east"><button>East</button></span>
-<span class="south"><button>South</button></span>
-<span class="west"><button>West</button></span>
-<span class="attack"><button>Attack</button></span>
-<span class="quaff"><button>Quaff</button></span>
+<div class="north"><button id="north_button">North</button></div>
+<span class="east"><button id="east_button">East</button></span>
+<span class="south"><button id="south_button">South</button></span>
+<span class="west"><button id="west_button">West</button></span>
+<span class="attack"><button id="attack_button">Attack</button></span>
+<span class="quaff"><button id="quaff_button">Quaff</button></span>
 
 
 
