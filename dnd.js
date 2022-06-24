@@ -22,8 +22,6 @@ const eastClicked = function (e) {
     } else {
         --startY;
         document.getElementById("text_area").value = "Can't go that direction";
-        window.alert(String([startX, 1 + startY]));
-        window.alert(dungeon);
     }
 };
 
