@@ -1,46 +1,42 @@
 const dungeon = "[[0,0], [1,0], [0,1], [0,2], [0,3]]";
 
-var startX = 0;
-var startY = 0;
+var locationX = 0;
+var locationY = 0;
 
-const northClicked = function (e) {
-    // ++startX;
-    if (dungeon.includes(String([++startX, startY]))){
-        document.getElementById("text_area").value = [startX, startY];
-    } else {
-        --startX;
-        document.getElementById("text_area").value = "Can't go that direction";
+let isTest = typeof window == 'undefined';
 
+function addToGameLog(message) {
+    if (!isTest) {
+        document.getElementById("text_area").value += message + "\n";
     }
+}
 
+moveTo = function (newX, newY) {
+    if (dungeon.includes(String([newX, newY]))) {
+        locationX = newX;
+        locationY = newY;
+        addToGameLog([newX, newY]);
+        return String([newX, newY]);
+    } else {
+        addToGameLog("Can't go that direction");
+        return "Can't go that direction";
+    }
+}
+
+northClicked = function (e) {
+    return moveTo(locationX + 1, locationY);
 };
 
-const eastClicked = function (e) {
-    // ++startY;
-    if (dungeon.includes(String([startX, ++startY]))){
-        document.getElementById("text_area").value = [startX, startY];
-    } else {
-        --startY;
-        document.getElementById("text_area").value = "Can't go that direction";
-    }
+eastClicked = function (e) {
+    return moveTo(locationX, locationY + 1);
 };
 
-const southClicked = function (e) {
-    if (dungeon.includes(String([--startX, startY]))){
-        document.getElementById("text_area").value = [startX, startY];
-    } else {
-        ++startX;
-        document.getElementById("text_area").value = "Can't go that direction";
-    }
+southClicked = function (e) {
+    return moveTo(locationX - 1, locationY);
 };
 
-const westClicked = function (e) {
-    if (dungeon.includes(String([startX, --startY]))){
-        document.getElementById("text_area").value = [startX, startY];
-    } else {
-        ++startY;
-        document.getElementById("text_area").value = "Can't go that direction";
-    }
+westClicked = function (e) {
+    return moveTo(locationX, locationY - 1);
 };
 
 const docLoaded = function (e) {
@@ -53,16 +49,23 @@ const docLoaded = function (e) {
     southButton.addEventListener("click", southClicked);
     let westButton = document.getElementById("west_button");
     westButton.addEventListener("click", westClicked);
-    document.addEventListener("keypress", function(event) {
-        if (event.code === 38) {
-            alert('north.');
-        } elseif (event.code === 39)
-        {alert('east.');
-        } elseif (event.code === 40)
-        {alert('south.');
-        } elseif (event.code === 37)
-        {alert('west.');}
-    });
+    // document.addEventListener("keypress", function(event) {
+    //     if (event.code === 38) {
+    //         alert('north.');
+    //     } elseif (event.code === 39)
+    //     {alert('east.');
+    //     } elseif (event.code === 40)
+    //     {alert('south.');
+    //     } elseif (event.code === 37)
+    //     {alert('west.');}
+    // });
 };
 
-window.addEventListener('DOMContentLoaded', docLoaded);
+if (!isTest) {
+    window.addEventListener('DOMContentLoaded', docLoaded);
+} else {
+    exports.northClicked = northClicked;
+    exports.eastClicked = eastClicked;
+    exports.southClicked = southClicked;
+    exports.westClicked = westClicked;
+}
