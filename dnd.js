@@ -5,9 +5,20 @@ var locationY = 0;
 
 let isTest = typeof window == 'undefined';
 
+var ui = null;
+
+PageUI = {};
+PageUI.addToLog = function (message) {
+    document.getElementById("text_area").value += message + "\n";
+}
+
+ui = PageUI;
+
 function addToGameLog(message) {
     if (!isTest) {
         document.getElementById("text_area").value += message + "\n";
+    } else {
+        console.log("HERE")
     }
 }
 
@@ -16,7 +27,8 @@ moveTo = function (newX, newY) {
         locationX = newX;
         locationY = newY;
         addToGameLog([newX, newY]);
-        return String([newX, newY]);
+        //PageUI.addToLog([newX, newY]);
+        return [newX, newY];
     } else {
         addToGameLog("Can't go that direction");
         return "Can't go that direction";
