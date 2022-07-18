@@ -1,61 +1,94 @@
-const dnd = require('./dnd');
-
-//TODO - make tests independent.
-//TODO - test run in web page?
-//TODO - test text in the text area
-//TODO - use real data structure for rooms
 
 gameLog = "";
 MockUI = {};
+MockUI.name = "Mock UI";
 MockUI.addToGameLog = function (message) {
     gameLog += message;
 }
 
+let dnd = DndController;
+
 describe('DND', () => {
-    beforeAll(async () => {
-        await page.goto('file:////Users/calebmooi/projects/webdnd/index.html');
-    });
 
-    // test('northClickedMoves', async () => {
-    //     var result = await page.evaluate(() => northClicked());
-    //     expect(result).toEqual([1, 0]);
-    //     var log = await page.evaluate(() => document.getElementById("text_area").value);
-    //     expect(log).toContain("1,0");
-    // });
-
-    test("mock", () => {
-        dnd.ui = MockUI;
-        //MockUI.addToGameLog("goo");
-        //dnd.northClicked(MockUI);
-        //expect(gameLog).toEqual([1, 0]);
-        expect(dnd.northClicked(MockUI)).toEqual([1, 0]);
+    beforeEach(() => {
+        dnd.setUI(MockUI);
+        gameLog = "";
     })
 
-    // test('northClickedDoesNotMove', () => {
+    it("mockNorth[0,0]", () => {
+        dnd.northClicked(0, 0);
+        // test location
+        expect(gameLog).toEqual("1,0");
+    })
+
+    // it("mockNorth[1,0]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     //console.log(dnd.ui);
+    //     dnd.northClicked(1, 0);
+    //     expect(gameLog).toEqual("Can't go that direction");
+    // })
+    //
+    // it("mockEast[0,0]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     dnd.eastClicked(0, 0);
+    //     expect(gameLog).toEqual("0,1");
+    // })
+    //
+    // it("mockEast[0,3]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     dnd.eastClicked(0, 3);
+    //     expect(gameLog).toEqual("Can't go that direction");
+    // })
+    //
+    // it("mockSouth[0,0]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     dnd.southClicked(0, 0);
+    //     expect(gameLog).toEqual("Can't go that direction");
+    // })
+    //
+    // it("mockSouth[1,0]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     dnd.southClicked(1, 0);
+    //     expect(gameLog).toEqual("0,0");
+    // })
+    //
+    // it("mockWest[0,1]", () => {
+    //     dnd.ui = MockUI;
+    //     dnd.setUI(MockUI);
+    //     dnd.westClicked(0, 1);
+    //     expect(gameLog).toEqual("0,0");
+    // })
+    //
+    // it('northClickedDoesNotMove', () => {
     //     expect(dnd.northClicked()).toBe("Can't go that direction");
     // });
     //
-    // test('eastClickedDoesNotMove', () => {
+    // it('eastClickedDoesNotMove', () => {
     //     expect(dnd.eastClicked()).toBe("Can't go that direction");
     // });
     //
-    // test('southClickMoves', () => {
+    // it('southClickMoves', () => {
     //     expect(dnd.southClicked()).toEqual([0, 0]);
     // });
     //
-    // test('southClickedDoesNotMove', () => {
+    // it('southClickedDoesNotMove', () => {
     //     expect(dnd.southClicked()).toBe("Can't go that direction");
     // });
     //
-    // test('eastClickedMoves', () => {
+    // it('eastClickedMoves', () => {
     //     expect(dnd.eastClicked()).toEqual([0, 1]);
     // });
     //
-    // test('westClickedMoves', () => {
+    // it('westClickedMoves', () => {
     //     expect(dnd.westClicked()).toEqual([0, 0]);
     // });
     //
-    // test('westClickedDoesNotMove', () => {
+    // it('westClickedDoesNotMove', () => {
     //     expect(dnd.westClicked()).toBe("Can't go that direction");
     // });
 
