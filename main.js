@@ -1,10 +1,13 @@
-
 let ui = PageUI;
 let controller = DndController;
-ui.controller = DndController;
 
+// window.onload = function () {
+//     // ui.wire();
+// }
 const docLoaded = function (e) {
     console.log('DOM fully loaded and parsed');
+    ui.setController(DndController);
+    controller.setUI(PageUI);
     ui.wire();
     // let northButton = document.getElementById("north_button");
     // northButton.addEventListener("click", northClicked);
@@ -26,12 +29,14 @@ const docLoaded = function (e) {
     // });
 };
 
-if (!isTest) {
-    window.addEventListener('DOMContentLoaded', docLoaded);
-} else {
-    exports.northClicked = northClicked;
-    exports.eastClicked = eastClicked;
-    exports.southClicked = southClicked;
-    exports.westClicked = westClicked;
-    exports.setUI = setUI;
-}
+window.addEventListener('DOMContentLoaded', docLoaded);
+
+// if (!isTest) {
+//     window.addEventListener('DOMContentLoaded', docLoaded);
+// } else {
+//     exports.northClicked = northClicked;
+//     exports.eastClicked = eastClicked;
+//     exports.southClicked = southClicked;
+//     exports.westClicked = westClicked;
+//     exports.setUI = setUI;
+// }

@@ -3,7 +3,10 @@
 <head>
     <title>Web D&D</title>
     <link rel="stylesheet" href="dnd.css">
+    <script src="dungeon.js"> </script>
     <script src="dnd.js"> </script>
+    <script src="pageUI.js"> </script>
+    <script src="main.js"> </script>
 </head>
 <body>
 
@@ -15,11 +18,12 @@
 
 <!--<hr/>-->
 <h2><span class="hp">HP:</span></h2>
+<textarea class="hp_text_area" id="hp_text_area"></textarea>
 <h2><span class="ac">AC:</span></h2>
 <h2><span class="location">Location:</span></h2>
+<textarea class="location_text_area" id="location_text_area"></textarea>
 <h2><span class="inventory">Inventory:</span></h2>
-<textarea rows="30" cols="100" id="text_area">HP: 10
-You take a potion
+<textarea rows="30" cols="100" class="text_area" id="text_area">Press a button to begin
 </textarea>
 
 <img src="compass.png" class="compass">
@@ -36,16 +40,5 @@ You take a potion
 
 </script>
 
-<!--<h3>Header 3</h3>-->
-<!--<h6><span class="blue">Header 6</span></h6>-->
-<!--<p>My first paragraph.</p>-->
-<!--<b>bold</b>-->
-<!--<hr/>-->
-<!--<br/>-->
-<!--<div class="red">-->
-<!--    <i>italic</i>-->
-<!--</div>-->
-<!--<br/>-->
-<!--<button onclick="alert('You clicked me!');">Click Me!</button>-->
 </body>
 </html>

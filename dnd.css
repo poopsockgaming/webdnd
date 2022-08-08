@@ -64,6 +64,31 @@ button:active {
     margin-left: 100px;
 }
 
+.hp_text_area {
+    position: absolute;
+    width: 100px;
+    margin-top: -50px;
+    margin-left: 210px;
+    background-color:rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: x-large;
+}
+
+.location_text_area {
+    position: absolute;
+    width: 100px;
+    margin-top: -45px;
+    margin-left: 250px;
+    background-color:rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: x-large;
+}
+
+
 .ac {
     margin-left: 100px;
 }
@@ -76,7 +101,7 @@ button:active {
     margin-left: 100px;
 }
 
-textarea {
+.text_area {
     position: absolute;
     top: 80px;
     left: 400px;
