@@ -1,46 +1,46 @@
-let PageUI = {};
-PageUI.name = "Page UI";
+let PageUI = function () {
+    this.name = "Page UI";
+    this.controller = null;
+};
 
-PageUI.controller = null;
-
-PageUI.enableMovementButtons = function () {
+PageUI.prototype.enableMovementButtons = function () {
     document.querySelector('#north_button').disabled = false;
     document.querySelector('#east_button').disabled = false;
     document.querySelector('#south_button').disabled = false;
     document.querySelector('#west_button').disabled = false;
 }
 
-PageUI.disableMovementButtons = function () {
+PageUI.prototype.disableMovementButtons = function () {
     document.querySelector('#north_button').disabled = true;
     document.querySelector('#east_button').disabled = true;
     document.querySelector('#south_button').disabled = true;
     document.querySelector('#west_button').disabled = true;
 }
 
-PageUI.setController = function (controller) {
+PageUI.prototype.setController = function (controller) {
     this.controller = controller;
 }
 
-PageUI.addToLocationLog = function (message) {
+PageUI.prototype.addToLocationLog = function (message) {
     document.getElementById("location_text_area").value = "";
     document.getElementById("location_text_area").value += message + "\n";
 }
 
-PageUI.addToHPLog = function (message) {
+PageUI.prototype.addToHPLog = function (message) {
     document.getElementById("hp_text_area").value = "";
     document.getElementById("hp_text_area").value += message + "\n";
 }
 
-PageUI.addToGameLog = function (message) {
+PageUI.prototype.addToGameLog = function (message) {
     // document.getElementById("text_area").value = "";
     document.getElementById("text_area").value += message + "\n";
 }
 
-PageUI.clearGameLog = function () {
+PageUI.prototype.clearGameLog = function () {
     document.getElementById("text_area").value = "";
 }
 
-PageUI.wire = function () {
+PageUI.prototype.wire = function () {
     // console.log("this.controller: ", this.controller);
     let northButton = document.querySelector("#north_button");
     northButton.addEventListener("click", () => {this.controller.northClicked()});
