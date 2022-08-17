@@ -31,6 +31,11 @@ PageUI.prototype.addToHPLog = function (message) {
     document.getElementById("hp_text_area").value += message + "\n";
 }
 
+PageUI.prototype.addToInventoryLog = function (message) {
+    document.getElementById("inventory_text_area").value = "";
+    document.getElementById("inventory_text_area").value += message + "\n";
+}
+
 PageUI.prototype.addToGameLog = function (message) {
     // document.getElementById("text_area").value = "";
     document.getElementById("text_area").value += message + "\n";

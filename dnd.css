@@ -88,6 +88,17 @@ button:active {
     font-size: x-large;
 }
 
+.inventory_text_area {
+    position: absolute;
+    width: 100px;
+    margin-top: -40px;
+    margin-left: 250px;
+    background-color:rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: x-large;
+}
 
 .ac {
     margin-left: 100px;

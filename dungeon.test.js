@@ -33,9 +33,17 @@ describe("dungeon", () => {
     })
 
     it("gets room key", () => {
-        this.dungeon.addRoom(0, 1);
+        this.dungeon.addRoom(0, 1); //todo    actually add key
         expect(this.dungeon.roomKey(0, 1)).toEqual("0,1");
     })
 
-
+    it("clears dungeon rooms", () => {
+        this.dungeon.rooms = new Map([
+            ["1", 1],
+            ["2", 2],
+            ["3", 3]
+        ]);
+        this.dungeon.clearDungeon();
+        expect(this.dungeon.rooms.size).toBe(0);
+    })
 })

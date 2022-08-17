@@ -2,15 +2,18 @@ MockUI = function () {
     this.locationLog = "";
     this.gameLog = "";
     this.hpLog = "";
+    this.inventoryLog = "";
+    this.movementButtonsEnabled = true;
 };
 MockUI.prototype.name = "Mock UI";
 ui = {};
 
+MockUI.prototype.setMovementButtonsEnabled = function (enabled) {
+    this.movementButtonsEnabled = enabled
+};
 MockUI.prototype.enableMovementButtons = function () {
-    return null
 };
 MockUI.prototype.disableMovementButtons = function () {
-    return null
 };
 
 MockUI.prototype.addToLocationLog = function (message) {
@@ -25,6 +28,10 @@ MockUI.prototype.addToHPLog = function (message) {
     this.hpLog += message;
 }
 
+MockUI.prototype.addToInventoryLog = function (message) {
+    this.inventoryLog += message;
+}
+
 describe('DND', () => {
 
     beforeEach(() => {
@@ -34,11 +41,8 @@ describe('DND', () => {
         this.dungeon.addRoom(0, 1);
         this.dungeon.addRoom(0, 2);
         this.dungeon.addRoom(0, 3);
-
+        // DndController.prototype.dungeonLevel();
         this.ui = new MockUI();
-        // dnd.setUI(this.ui);
-        // dnd.setDungeon(this.dungeon);
-        // dnd.reset();
 
         this.dnd = new DndController(this.dungeon, this.ui);
 
@@ -125,6 +129,10 @@ describe('DND', () => {
             expect(this.ui.gameLog).toContain("You've encountered a Kobold.")
         })
 
+        // it("battle disabled movement buttons", () => {
+        //     expect(1).toEqual(2);
+        // })
+
         it("initiative roll", () => {
             this.dnd.roll = function () {
                 return 5
@@ -182,10 +190,45 @@ describe('DND', () => {
                 return kobold.initiative = 21;
             }
             this.dnd.northClicked();
-            // player.initiative = 19;
-            // kobold.initiative = 1;
             this.dnd.playerAttacks();
             expect(this.ui.gameLog).toContain("The enemy hits you for 11 damage!");
         })
     })
+
+    it("dungeonLevel1 size", () => {
+        let level = 1;
+        DndController.prototype.dungeonLevel(level);
+        expect(dungeon.rooms.size).toBe(5);
+    })
+
+    it("dungeonLevel2 size", () => {
+        let level = 2;
+        DndController.prototype.dungeonLevel(level);
+        expect(dungeon.rooms.size).toBe(6);
+    })
+
+    it("dungeonLevel3 size", () => {
+        let level = 3;
+        DndController.prototype.dungeonLevel(level);
+        expect(dungeon.rooms.size).toBe(8);
+    })
+
+
+    it("dungeon place exit", () => {
+        this.dnd.nextDungeon();
+        expect(level).toBe(2)
+        expect(this.ui.gameLog).toContain("You've entered the next dungeon!")
+    })
+
+    it("finding key", () => {
+        this.dungeon.addRoom(0, 0);
+        this.dungeon.addRoom(1, 0);
+        this.dungeon.placeMob(1, 0, {name: "key"});
+        this.dnd.eastClicked();
+        expect(this.ui.gameLog).toBe("You've found a key!");
+        expect(this.ui.inventoryLog).toBe("Keys: 1");
+    })
+
+    
+    
 });

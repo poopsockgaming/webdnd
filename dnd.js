@@ -1,8 +1,13 @@
+let level = 1;
+
+let key;
+
 let player = {
     hp: 10,
     ac: 10,
     damage: 3,
-    initiative: 0
+    initiative: 0,
+    keys: 0
 };
 
 let kobold = {
@@ -19,6 +24,45 @@ let DndController = function (dungeon, ui) {
     this.x = 0;
     this.y = 0;
 };
+
+DndController.prototype.dungeonLevel = function (level) {
+    if (level === 1) {
+        console.log("dungeon: ", dungeon);
+        dungeon.addRoom(0, 0);
+        dungeon.addRoom(1, 0);
+        dungeon.addRoom(0, 1);
+        dungeon.addRoom(0, 2);
+        dungeon.addRoom(0, 3);
+        dungeon.placeMob(0, 3, kobold);
+        dungeon.placeMob(0, 2, {name: "exit"});
+        dungeon.placeMob(0, 1, {name: "key"});
+
+    }
+    if (level === 2) {
+        dungeon.clearDungeon();
+        dungeon.addRoom(0, 0);
+        dungeon.addRoom(1, 0);
+        dungeon.addRoom(2, 0);
+        dungeon.addRoom(3, 0);
+        dungeon.addRoom(4, 0);
+        dungeon.addRoom(5, 0);
+        dungeon.placeMob(4, 0, kobold);
+        dungeon.placeMob(5, 0, {name: "exit"});
+
+    }
+    if (level === 3) {
+        dungeon.clearDungeon();
+        dungeon.addRoom(0, 0);
+        dungeon.addRoom(1, 0);
+        dungeon.addRoom(2, 0);
+        dungeon.addRoom(3, 0);
+        dungeon.addRoom(0, 1);
+        dungeon.addRoom(0, 2);
+        dungeon.addRoom(0, -1);
+        dungeon.addRoom(0, -2);
+    }
+
+}
 
 DndController.prototype.getLocation = function () {
     return [this.x, this.y];
@@ -123,7 +167,6 @@ DndController.prototype.playerAttacks = function () {
 
 }
 
-
 DndController.prototype.battle = function (mob) {
     // mob = mob[0];
     this.ui.disableMovementButtons();
@@ -138,28 +181,37 @@ DndController.prototype.battle = function (mob) {
     }
 }
 
+DndController.prototype.nextDungeon = function () {
+    console.log("level: ", level);
+    // dungeon.clearDungeon();
+    ++level;
+    this.ui.addToGameLog("You've entered the next dungeon!");
+    this.x = 0;
+    this.y = 0;
+    this.ui.addToLocationLog(this.x + "," + this.y);
+    this.dungeonLevel(level);
+}
+
 DndController.prototype.dungeonEncounter = function (x, y) {
-    this.ui.addToGameLog("You've encountered a Kobold.");
-    this.battle(this.dungeon.getMobs(x, y));
-    // let room = dungeon.get(String(location));
-    // if (room[0] === "mob") {
-    //     this.battleStart(room);
-    //     return "mob";
-    // }
-    //if statements for potion, keys, etc.
+    if (this.dungeon.getMobs(x, y)[0].name === "exit") {
+        this.nextDungeon();
+    }
+    if (this.dungeon.getMobs(x, y)[0].name === "key") {
+        player.keys = player.keys + 1;
+        this.ui.addToGameLog("You've found a key!");
+        this.ui.addToInventoryLog("Keys: " + player.keys);
+    }
+    if (this.dungeon.getMobs(x, y)[0].name === "kobold") {
+        this.ui.addToGameLog("You've encountered a Kobold.");
+        this.battle(this.dungeon.getMobs(x, y));
+    }
 }
 
 DndController.prototype.moveTo = function (newX, newY) {
     console.log("moveTo: " + newX + "," + newY);
-    // if (this.containsElement(String([newX, newY]))) {
-    // console.log("this.dungeon.hasRoom(newX, newY): ", this.dungeon.hasRoom(newX, newY));
     if (this.dungeon.hasRoom(newX, newY)) {
-        // if (dungeon.includes(String([newX, newY]))) {
-        // if (dungeon.hasRoom(newX, newY)) {
-        //     dungeon.getMobsIn(newX, newY);
         this.setLocation(newX, newY);
         this.ui.addToLocationLog([newX, newY]);
-        console.log("this.dungeon.getMobs(newX, newY): ", this.dungeon.getMobs(newX, newY));
         if (this.dungeon.getMobs(newX, newY).length !== 0) {
             this.dungeonEncounter(newX, newY)
         }

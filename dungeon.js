@@ -4,6 +4,7 @@ let Dungeon = function () {
 
 let Room = function () {
     this.mobs = [];
+
 }
 
 Dungeon.prototype.getRoomCount = function () {
@@ -31,4 +32,8 @@ Dungeon.prototype.getMobs = function (x, y) {
     if (this.roomKey(x, y) !== undefined) {
         return this.rooms.get(this.roomKey(x, y)).mobs;
     }
+}
+
+Dungeon.prototype.clearDungeon = function () {
+    this.rooms.clear();
 }
